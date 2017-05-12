@@ -7,7 +7,8 @@ class Api::V1::MoviesController < ApplicationController
   end
 
   def show
-    render json: Movie.find_by(id: params[:id])
+    movie = Movie.find_by(id: params[:id])
+    render json: { 'movie' => movie, 'genre' => movie.genres, 'torrents' => movie.torrents}
   end
 
   def create
