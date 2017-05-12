@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512082541) do
+ActiveRecord::Schema.define(version: 20170512082752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 20170512082541) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "genres_movies", force: :cascade do |t|
+    t.bigint "genre_id"
+    t.bigint "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_genres_movies_on_genre_id"
+    t.index ["movie_id"], name: "index_genres_movies_on_movie_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -58,6 +67,8 @@ ActiveRecord::Schema.define(version: 20170512082541) do
     t.index ["torrent_id"], name: "index_torrents_movies_on_torrent_id"
   end
 
+  add_foreign_key "genres_movies", "genres"
+  add_foreign_key "genres_movies", "movies"
   add_foreign_key "torrents_movies", "movies"
   add_foreign_key "torrents_movies", "torrents"
 end
