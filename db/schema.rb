@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512080214) do
+ActiveRecord::Schema.define(version: 20170512081206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,22 @@ ActiveRecord::Schema.define(version: 20170512080214) do
     t.text "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["rating"], name: "index_movies_on_rating"
+    t.index ["title"], name: "index_movies_on_title"
+    t.index ["year"], name: "index_movies_on_year"
+  end
+
+  create_table "torrents", force: :cascade do |t|
+    t.text "url"
+    t.text "hash"
+    t.string "quality"
+    t.decimal "size"
+    t.integer "seeds"
+    t.integer "peers"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["peers"], name: "index_torrents_on_peers"
+    t.index ["seeds"], name: "index_torrents_on_seeds"
   end
 
 end
