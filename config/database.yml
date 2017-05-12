@@ -15,63 +15,63 @@
 # gem 'pg'
 #
 
-development: &default
-  adapter: postgresql
-  database: hypertorrentapi_development
-  encoding: utf8
-  host: localhost
-  min_messages: warning
-  pool: 5
-  timeout: 5000
-
-docker:
-  adapter: postgresql
-  encoding: unicode
-  database: hypertorrentapi_docker
-  pool: 5
-  username: postgres
-  password:
-  host: db
-
-test:
-  <<: *default
-  database: hypertorrent-api_test
-
-production:
-  <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-  database: hypertorrentapi_production
-
-
-# default: &default
+# development: &default
 #   adapter: postgresql
+#   database: hypertorrentapi_development
 #   encoding: utf8
 #   host: localhost
 #   min_messages: warning
 #   pool: 5
 #   timeout: 5000
-#   min_messages: warning
-
-# development:
-#   <<: *default
-#   database: torrent_api_development
-
-# test:
-#   <<: *default
-#   database: torrent_api_test
 
 # docker:
 #   adapter: postgresql
 #   encoding: unicode
-#   database: torrent_api_docker
+#   database: hypertorrentapi_docker
 #   pool: 5
 #   username: postgres
 #   password:
 #   host: db
 
+# test:
+#   <<: *default
+#   database: hypertorrent-api_test
+
 # production:
 #   <<: *default
-#   database: <%= ENV['DATABASE'] %>
-#   user: <%= ENV['DATABASE_USER'] %>
-#   port: 5432
-#   password: <%= ENV['DATABASE_PASSWORD'] %>
+#   url: <%= ENV['DATABASE_URL'] %>
+#   database: hypertorrentapi_production
+
+
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  host: localhost
+  min_messages: warning
+  pool: 5
+  timeout: 5000
+  min_messages: warning
+
+development:
+  <<: *default
+  database: torrent_api_development
+
+test:
+  <<: *default
+  database: torrent_api_test
+
+docker:
+  adapter: postgresql
+  encoding: unicode
+  database: torrent_api_docker
+  pool: 5
+  username: postgres
+  password:
+  host: db
+
+production:
+  <<: *default
+  database: <%= ENV['DATABASE'] %>
+  # user: <%= ENV['DATABASE_USER'] %>
+  # port: 5432
+  # password: <%= ENV['DATABASE_PASSWORD'] %>
