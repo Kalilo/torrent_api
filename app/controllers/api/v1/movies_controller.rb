@@ -29,7 +29,7 @@ class Api::V1::MoviesController < ApplicationController
   end
 
   def destroy
-    if Movie.find_by(params[:movie][:id]).destroy
+    if Movie.find_by(params[:id]).destroy
       render json: { success: 'movie successfully deleted' }
     else
       render json: { error: 'failed to delete movie' }
@@ -39,20 +39,20 @@ class Api::V1::MoviesController < ApplicationController
 private
 
   def update_movie
-    m = Movie.find_by(id: params[:movie][:id])
-    m.title = params[:movie][:title] if params[:movie][:title]
-    m.description = params[:movie][:description] if params[:movie][:description]
-    m.year = params[:movie][:year] if params[:movie][:year]
-    m.runtime = params[:movie][:runtime] if params[:movie][:runtime]
-    m.rating = params[:movie][:rating] if params[:movie][:rating]
-    m.image = params[:movie][:image] if params[:movie][:image]
-    m.genre_ids = params[:movie][:genre_ids] if params[:movie][:genre_ids]
-    m.torrent_ids = params[:movie][:torrent_ids] if params[:movie][:torrent_ids]
+    m = Movie.find_or_create_by(id: params[:id])
+    m.title = params[:title] if params[:title]
+    m.description = params[:description] if params[:description]
+    m.year = params[:year] if params[:year]
+    m.runtime = params[:runtime] if params[:runtime]
+    m.rating = params[:rating] if params[:rating]
+    m.image = params[:image] if params[:image]
+    m.genre_ids = params[:genre_ids] if params[:genre_ids]
+    m.torrent_ids = params[:torrent_ids] if params[:torrent_ids]
     m
   end
 
   def movies_params
-    params.require(:movie).permit(
+    params.permit(
       :title,
       :description,
       :year,
