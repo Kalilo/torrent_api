@@ -12,5 +12,9 @@ class CreateMovies < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+
+    add_index :movies, :title
+    add_index :movies, :year
+    add_index :movies, :rating
   end
 end
