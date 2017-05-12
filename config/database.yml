@@ -42,4 +42,7 @@ docker:
 
 production:
   <<: *default
-  database: torrent_api_production
+  database: <%= ENV['DATABASE'] %>
+  user: <%= ENV['DATABASE_USER'] %>
+  port: 5432
+  password: <%= ENV['DATABASE_PASSWORD'] %>
